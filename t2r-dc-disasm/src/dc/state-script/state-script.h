@@ -26,7 +26,7 @@ struct StateScript //0x50
 	SsOptions*				m_pSsOptions;			///< <c>0x18</c>: ptr to the SsOptions
 	uint64_t				field_20;				///< <c>0x20</c>: always 0 ?
 	SsState*				m_pSsStateTable;		///< <c>0x28</c>: ptr to the SsState Table
-	int16_t					m_numStates;			///< <c>0x30</c>: number of states
+	int16_t					m_stateCount;			///< <c>0x30</c>: number of states
 	//start of debug info
 	int16_t					m_line;					///< <c>0x32</c>: this is a line number thats get displayed in the debug display
 	uint32_t				field_34;				///< <c>0x34</c>: padding probably
@@ -77,21 +77,26 @@ struct SsState //0x18
 	SsOnBlock*				m_pSsOnBlocks;			///< <c>0x10</c>: ptr to the SsOnBlocks table
 };
 
-struct SsOnBlock //0x50
+struct SsTrackGroup
+{
+	uint64_t				field_0;                ///< <c>0x00</c>:
+	uint16_t				m_totalLambdaCount;	///< <c>0x08</c>: unk number
+	int16_t					m_numTracks;			///< <c>0x0A</c>: num tracks
+	uint32_t				m_padding;				///< <c>0x1C</c>: padding probably
+	SsTrack* m_aTracks;				///< <c>0x10</c>: ptr to an array of Tracks
+	const char* m_name;					///< <c>0x18</c>: eg: ss-fp-test initial (on (start))
+	uint64_t				field_20;               ///< <c>0x20</c>:
+	uint64_t				field_28;               ///< <c>0x28</c>:
+	uint64_t				field_30;               ///< <c>0x30</c>:
+};
+
+struct SsOnBlock //
 {
 	int32_t					m_blockType;			///< <c>0x00</c>: //on start || on update || on event etc
 	uint32_t				m_unkNumber;			///< <c>0x04</c>: unk number
 	StringId64				m_blockEventId;			///< <c>0x08</c>: UNSURE. Can be null. if its null there's no script lambda ptr
-	void*					m_pScriptLambda;		///< <c>0x10</c>: ptr to the script Lambda
-	uint64_t				unk;
-	uint16_t				m_unkNumber2;			///< <c>0x20</c>: unk number
-	int16_t					m_numTracks;			///< <c>0x22</c>: num tracks
-	uint32_t				m_padding;				///< <c>0x1C</c>: padding probably
-	SsTrack*				m_pTrack;				///< <c>0x20</c>: ptr to a track
-	const char*				m_name;					///< <c>0x30</c>: eg: ss-fp-test initial (on (start))
-	uint64_t				field_38;               ///< <c>0x38</c>:
-	uint64_t				field_40;               ///< <c>0x40</c>:
-	uint64_t				field_48;               ///< <c>0x48</c>:
+	void* m_pScriptLambda;		///< <c>0x10</c>: ptr to the script Lambda
+	SsTrackGroup            m_trackGroup;
 };
 
 struct SsTrack //0x18

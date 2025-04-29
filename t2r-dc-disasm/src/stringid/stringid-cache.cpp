@@ -40,7 +40,7 @@ void StringIdCache::GetDebugInfo(DC_Header* pHdr)
 				StateScript* pSs = reinterpret_cast<StateScript*>(pEntry[k].m_entryPtr);
 				//AddStringToLocalSidCache(pSs->m_name);
 				SsState* pStateArray = pSs->m_pSsStateTable;
-				int16_t numStates = pSs->m_numStates;
+				int16_t numStates = pSs->m_stateCount;
 				int64_t numSsOnBlocks = 0;
 				SsOnBlock* pOnBlock = nullptr;
 				char stateName[256];
@@ -55,7 +55,7 @@ void StringIdCache::GetDebugInfo(DC_Header* pHdr)
 							//sscanf_s(pOnBlock[j].m_debugBlockInfo, "%s %s", arr, 0x10, buf, 256);
 							//find the first occurance of space: give that the format of debug info is as follows
 							//<name_of_the_script> <state_name> (on ((<start>||<update>||<event>))) we can resolve some StringIds this way..
-							const char* ptr = strstr(pOnBlock[j].m_name, " ");
+							const char* ptr = strstr(pOnBlock[j].m_trackGroup.m_name, " ");
 							if (ptr)
 							{
 								ptr++;
@@ -65,7 +65,7 @@ void StringIdCache::GetDebugInfo(DC_Header* pHdr)
 							}
 							else
 							{
-								fprintf(g_outHandle, pOnBlock[j].m_name);
+								fprintf(g_outHandle, pOnBlock[j].m_trackGroup.m_name);
 							}
 						}
 					}

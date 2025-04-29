@@ -355,9 +355,9 @@ void DumpBlocks(SsOnBlock* pBlock)
 		}
 	}
 	fprintf(g_outHandle, "    (on (%s)\n", blockType);
-	for (int i = 0; i < pBlock->m_numTracks; i++)
+	for (int i = 0; i < pBlock->m_trackGroup.m_numTracks; i++)
 	{
-		PrintTrackGroup(&pBlock->m_pTrack[i]);
+		PrintTrackGroup(&pBlock->m_trackGroup.m_aTracks[i]);
 	}
 	fprintf(g_outHandle, "    )\n");
 }
@@ -415,7 +415,7 @@ void DumpScript(StateScript* pStateScript)
 	}
 	//dump states
 	fprintf(g_outHandle, "\n");
-	int16_t maxStates = pStateScript->m_numStates;
+	int16_t maxStates = pStateScript->m_stateCount;
 	for (int16_t iStates = 0; iStates < maxStates; iStates++)
 	{
 		DumpState(&pStateScript->m_pSsStateTable[iStates]);

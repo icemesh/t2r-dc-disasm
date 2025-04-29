@@ -110,7 +110,7 @@ DC::Variant ExecuteScriptCode(ScriptLambda* pLambda)
 
 			case DC::kScriptCodeFDivide:
 			{
-				g_stackFrame->m_registers[dstReg].m_F32 = g_stackFrame->m_registers[operand1].m_F32 / g_stackFrame->m_registers[operand2].m_F32;
+				//g_stackFrame->m_registers[dstReg].m_F32 = g_stackFrame->m_registers[operand1].m_F32 / g_stackFrame->m_registers[operand2].m_F32;
 				fprintf(g_outHandle, "DC::kScriptCodeFDivide: S%d, S%d, S%d\n", dstReg, operand1, operand2);
 				idx = tmpIdx;
 				break;
@@ -396,7 +396,7 @@ DC::Variant ExecuteScriptCode(ScriptLambda* pLambda)
 
 			case DC::kImod:
 			{
-				g_stackFrame->m_registers[dstReg].m_I64 = g_stackFrame->m_registers[operand1].m_I64 % g_stackFrame->m_registers[operand2].m_I64;
+				//g_stackFrame->m_registers[dstReg].m_I64 = g_stackFrame->m_registers[operand1].m_I64 % g_stackFrame->m_registers[operand2].m_I64;
 				fprintf(g_outHandle, "DC::kImod: R%d mod R%d\n", operand1, operand2);
 				idx = tmpIdx;
 				break;
@@ -404,7 +404,7 @@ DC::Variant ExecuteScriptCode(ScriptLambda* pLambda)
 
 			case DC::kFmod:
 			{
-				g_stackFrame->m_registers[dstReg].m_F32 = fmodf(g_stackFrame->m_registers[operand1].m_F32, g_stackFrame->m_registers[operand2].m_F32);
+				//g_stackFrame->m_registers[dstReg].m_F32 = fmodf(g_stackFrame->m_registers[operand1].m_F32, g_stackFrame->m_registers[operand2].m_F32);
 				fprintf(g_outHandle, "DC::kFmod: fmodf(S%d S%d)\n", operand1, operand2);
 				idx = tmpIdx;
 				break;
